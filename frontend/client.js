@@ -1,5 +1,5 @@
 // Client dashboard script
-const API_BASE = 'https://event-management.onrender.com/api';
+const API_BASE = 'https://event-management-tvkx.onrender.com/api';
 
 // Authentication
 function getToken() {
