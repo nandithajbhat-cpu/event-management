@@ -1,5 +1,5 @@
 // Client dashboard script
-const API_BASE = 'http://localhost:3003/api';
+const API_BASE = 'https://event-management.onrender.com/api';
 
 // Authentication
 function getToken() {

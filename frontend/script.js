@@ -23,7 +23,7 @@ if (!isLoggedIn() || getUserRole() !== 'organizer') {
 }
 
 // API base URL
-const API_BASE = 'http://localhost:3003/api';
+const API_BASE = 'https://event-management.onrender.com/api';
 
 // Sample data for events (will be replaced with API)
 let events = [];
