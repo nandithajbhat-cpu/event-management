@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - EventX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="login-wrapper">
+        <div class="logo">
+            <span class="logo-icon">🎉</span>
+            <span class="logo-text">EventX</span>
+        </div>
+        <div class="panel" style="max-width: 400px; margin: 2rem auto; padding: 2rem;">
+            <h1 style="text-align: center; margin-bottom: 1.5rem;">Register</h1>
+            <form id="registerForm">
+                <label>
+                    Name
+                    <input type="text" id="name" required style="width: 100%; margin-bottom: 1rem;">
+                </label>
+                <label>
+                    Email
+                    <input type="email" id="email" required style="width: 100%; margin-bottom: 1rem;">
+                </label>
+                <label>
+                    Password
+                    <input type="password" id="password" required style="width: 100%; margin-bottom: 1rem;">
+                </label>
+                <label>
+                    Role
+                    <select id="role" required style="width: 100%; margin-bottom: 1rem;">
+                        <option value="">Select Role</option>
+                        <option value="organizer">Organizer</option>
+                        <option value="client">Client</option>
+                    </select>
+                </label>
+                <button type="submit" class="btn primary-btn full-width" style="margin-bottom: 1rem;">Register</button>
+                <p id="message" style="text-align: center;"></p>
+            </form>
+            <p style="text-align: center;">Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3003/api';
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const messageEl = document.getElementById('message');
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, role })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageEl.textContent = 'Registration successful! Please login.';
+                    messageEl.style.color = 'var(--accent)';
+                    setTimeout(() => window.location.href = 'login.html', 2000);
+                } else {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = 'var(--danger)';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Network error';
+                messageEl.style.color = 'var(--danger)';
+            }
+        });
+    </script>
+</body>
+</html>

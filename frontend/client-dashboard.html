@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - Event Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">🎉</span>
+            <span class="logo-text">EventX</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-link active" data-section="dashboard">Dashboard</a>
+            <a href="#" class="nav-link" data-section="search-events">Search Events</a>
+            <a href="#" class="nav-link" data-section="my-bookings">My Bookings</a>
+            <a href="#" class="nav-link" data-section="qr-code">QR Code</a>
+            <a href="#" class="nav-link" data-section="feedback">Feedback</a>
+            <a href="#" class="nav-link" data-section="logout">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section active">
+            <header class="header">
+                <div class="header-left">
+                    <button id="menuToggle" class="menu-btn">☰</button>
+                    <h1>Client Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span class="user-name">Client</span>
+                        <span class="user-role">Event Attendee</span>
+                    </div>
+                    <button id="logoutBtn" class="btn outline-btn">Logout</button>
+                </div>
+            </header>
+
+            <!-- Stats cards -->
+            <section class="stats">
+                <div class="card">
+                    <h3>Total Events</h3>
+                    <p id="totalEvents">0</p>
+                    <span class="card-note">Available</span>
+                </div>
+                <div class="card">
+                    <h3>My Bookings</h3>
+                    <p id="myBookings">0</p>
+                    <span class="card-note">Confirmed</span>
+                </div>
+            </section>
+
+            <!-- Upcoming events list -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Available Events</h2>
+                </div>
+                <ul id="availableEventsList" class="events-list">
+                    <!-- Populated by JavaScript -->
+                </ul>
+            </section>
+        </div>
+
+        <!-- Search Events Section -->
+        <div id="search-events-section" class="section">
+            <header class="header">
+                <div class="header-left">
+                    <button id="menuToggle2" class="menu-btn">☰</button>
+                    <h1>Search Events</h1>
+                </div>
+            </header>
+            <div class="panel">
+                <input type="text" id="searchQuery" placeholder="Search by name or type..." class="search-input">
+                <div id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- My Bookings Section -->
+        <div id="my-bookings-section" class="section">
+            <header class="header">
+                <div class="header-left">
+                    <button id="menuToggle3" class="menu-btn">☰</button>
+                    <h1>My Bookings</h1>
+                </div>
+            </header>
+            <div class="panel">
+                <ul id="myBookingsList" class="bookings-list"></ul>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div id="qr-code-section" class="section">
+            <header class="header">
+                <div class="header-left">
+                    <button id="menuToggle4" class="menu-btn">☰</button>
+                    <h1>QR Code</h1>
+                </div>
+            </header>
+            <div class="panel">
+                <p>Select a booking to generate QR code:</p>
+                <select id="bookingSelect"></select>
+                <button id="generateQRBtn" class="btn primary-btn">Generate QR</button>
+                <div id="qrDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Feedback Section -->
+        <div id="feedback-section" class="section">
+            <header class="header">
+                <div class="header-left">
+                    <button id="menuToggle5" class="menu-btn">☰</button>
+                    <h1>Feedback</h1>
+                </div>
+            </header>
+            <div class="panel">
+                <div id="feedbackForms"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EventX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="login-wrapper">
+        <div class="logo">
+            <span class="logo-icon">🎉</span>
+            <span class="logo-text">EventX</span>
+        </div>
+        <div class="panel" style="max-width: 400px; margin: 2rem auto; padding: 2rem;">
+            <h1 style="text-align: center; margin-bottom: 1.5rem;">Login</h1>
+            <form id="loginForm">
+                <label>
+                    Email
+                    <input type="email" id="email" required style="width: 100%; margin-bottom: 1rem;">
+                </label>
+                <label>
+                    Password
+                    <input type="password" id="password" required style="width: 100%; margin-bottom: 1rem;">
+                </label>
+                <button type="submit" class="btn primary-btn full-width" style="margin-bottom: 1rem;">Login</button>
+                <p id="message" style="text-align: center;"></p>
+            </form>
+            <p style="text-align: center;">Don't have an account? <a href="register.html">Register</a></p>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3003/api';
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageEl = document.getElementById('message');
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('role', data.role);
+                    if (data.role === 'organizer') {
+                        window.location.href = 'index.html';
+                    } else {
+                        window.location.href = 'client-dashboard.html';
+                    }
+                } else {
+                    messageEl.textContent = data.message;
+                    messageEl.style.color = 'var(--danger)';
+                }
+            } catch (error) {
+                messageEl.textContent = 'Network error';
+                messageEl.style.color = 'var(--danger)';
+            }
+        });
+    </script>
+</body>
+</html>

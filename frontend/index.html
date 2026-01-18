@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventX – Event Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">🎉</span>
+            <span class="logo-text">EventX</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-link active" id="dashboard-link">Dashboard</a>
+            <a href="#" class="nav-link" id="upcoming-events-link">Upcoming Events</a>
+            <a href="#" class="nav-link" id="bookings-link">Bookings</a>
+            <a href="#" class="nav-link" id="clients-link">Clients</a>
+            <a href="#" class="nav-link" id="vendors-link">Vendors</a>
+            <a href="#" class="nav-link" id="feedback-link">Feedback</a>
+            <a href="#" class="nav-link" id="settings-link">Settings</a>
+        </nav>
+        <button id="themeToggle" class="btn small-btn">Toggle Dark Mode</button>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="section active">
+                <!-- Header -->
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle" class="menu-btn">☰</button>
+                        <h1>Event Management Dashboard</h1>
+                    </div>
+                    <div class="header-right">
+                        <input type="text" id="searchInput" placeholder="Search events, clients..." />
+                        <div class="user-info">
+                            <span class="user-name">Admin</span>
+                            <span class="user-role">Event Manager</span>
+                        </div>
+                        <button id="logoutBtn" class="btn outline-btn">Logout</button>
+                    </div>
+                </header>
+
+                <!-- Stats cards -->
+                <section class="stats">
+                    <div class="card">
+                        <h3>Total Events</h3>
+                        <p id="totalEvents">0</p>
+                        <span class="card-note">This month</span>
+                    </div>
+                    <div class="card">
+                        <h3>Upcoming Events</h3>
+                        <p id="upcomingEvents">0</p>
+                        <span class="card-note">Next 7 days</span>
+                    </div>
+                    <div class="card">
+                        <h3>Confirmed Bookings</h3>
+                        <p id="confirmedBookings">0</p>
+                        <span class="card-note">All time</span>
+                    </div>
+                    <div class="card">
+                        <h3>Pending Inquiries</h3>
+                        <p id="pendingInquiries">0</p>
+                        <span class="card-note">Need follow‑up</span>
+                    </div>
+                </section>
+
+                <!-- Main grid: upcoming events + quick actions -->
+                <section class="grid">
+                    <!-- Upcoming events list -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Upcoming Events</h2>
+                            <span class="badge" id="eventsCountBadge">0</span>
+                        </div>
+                        <ul id="eventsList" class="events-list">
+                            <!-- Populated by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <!-- Quick actions & mini form -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Quick Actions</h2>
+                        </div>
+                        <div class="quick-actions">
+                            <button class="btn primary-btn" id="addSampleEventBtn">Add Sample Event</button>
+                            <button class="btn outline-btn" id="clearEventsBtn">Clear Events</button>
+                        </div>
+
+                        <h3 class="panel-subtitle">Create New Event</h3>
+                        <form id="eventForm" class="event-form">
+                            <label>
+                                Event Name
+                                <input type="text" id="eventName" required placeholder="e.g. Tech Fest 2025">
+                            </label>
+                            <label>
+                                Date
+                                <input type="date" id="eventDate" required>
+                            </label>
+                            <label>
+                                Type
+                                <select id="eventType">
+                                    <option value="Conference">Conference</option>
+                                    <option value="Workshop">Workshop</option>
+                                    <option value="Concert">Concert</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option value="College Fest">College Fest</option>
+                                </select>
+                            </label>
+                            <button type="submit" class="btn primary-btn full-width">Add Event</button>
+                            <p id="formMessage" class="form-message"></p>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Recent activity / notifications -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <ul id="activityList" class="activity-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Upcoming Events Section -->
+            <div id="upcoming-events-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle2" class="menu-btn">☰</button>
+                        <h1>Upcoming Events</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <ul id="upcomingEventsList" class="events-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bookings Section -->
+            <div id="bookings-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle3" class="menu-btn">☰</button>
+                        <h1>All Bookings</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <ul id="allBookingsList" class="bookings-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Clients Section -->
+            <div id="clients-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle4" class="menu-btn">☰</button>
+                        <h1>All Clients</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <ul id="clientsList" class="clients-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Vendors Section -->
+            <div id="vendors-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle5" class="menu-btn">☰</button>
+                        <h1>Vendors</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <div class="quick-actions">
+                        <button class="btn primary-btn" id="addVendorBtn">Add Vendor</button>
+                    </div>
+                    <ul id="vendorsList" class="vendors-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle6" class="menu-btn">☰</button>
+                        <h1>Settings</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <h2>Profile</h2>
+                    <p>Name: Admin</p>
+                    <p>Email: admin@example.com</p>
+                    <h3>Change Password</h3>
+                    <form id="changePasswordForm">
+                        <label>Current Password <input type="password" id="currentPassword" required></label>
+                        <label>New Password <input type="password" id="newPassword" required></label>
+                        <button type="submit" class="btn primary-btn">Change Password</button>
+                    </form>
+                    <button id="logoutBtn2" class="btn outline-btn">Logout</button>
+                </div>
+            </div>
+
+            <!-- Feedback Section -->
+            <div id="feedback-section" class="section">
+                <header class="header">
+                    <div class="header-left">
+                        <button id="menuToggle7" class="menu-btn">☰</button>
+                        <h1>Feedback</h1>
+                    </div>
+                </header>
+                <div class="panel">
+                    <div id="feedbackList"></div>
+                </div>
+            </div>
+        <footer class="footer">
+            <p>&copy; 2025 EventX – Event Management Dashboard</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
